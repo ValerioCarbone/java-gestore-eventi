@@ -13,8 +13,8 @@ public class Main {
         // BONUS
 
         Event disco = new Event(2000, LocalDate.parse("2024-07-24"), "Disco");
-        Event mostra = new Event(4000, LocalDate.parse("2024-07-29"), "Mostra");
-        Event gara = new Event(1000, LocalDate.parse("2024-07-24"), "Gara");
+        Event mostra = new Event(4000, LocalDate.parse("2024-10-29"), "Mostra");
+        Event gara = new Event(1000, LocalDate.parse("2024-06-22"), "Gara");
         Event sfilata = new Event(2000, LocalDate.parse("2024-09-20"), "Sfilata");
 
         ProgrammEventi programma = new ProgrammEventi("Festival Napoli");
@@ -69,7 +69,7 @@ public class Main {
 
             }
 
-            System.out.println("How many seats has our location?");
+            System.out.println("How many seats has your location?");
 
             int seats = Integer.parseInt(scan.nextLine());
 

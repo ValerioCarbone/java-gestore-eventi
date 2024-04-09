@@ -1,6 +1,5 @@
 package org.experis.events;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
 
 public class Event {
@@ -103,7 +102,7 @@ public class Event {
     public int getAvailableSeats() {
         return getNumberOfSeats() - getNumberOfBookedSeats();
     }
-    
+
 
     @Override
     public String toString() {
