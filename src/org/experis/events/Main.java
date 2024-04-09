@@ -8,6 +8,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
+        Event evento = null;
+
         boolean isCorrect = false;
 
         while (!isCorrect) {
@@ -33,7 +35,6 @@ public class Main {
 
             int seats = Integer.parseInt(scan.nextLine());
 
-            Event evento = null;
 
             try {
                 evento = new Event(seats, date, title);
@@ -43,11 +44,89 @@ public class Main {
                 System.out.println(e.getMessage());
             }
 
-            System.out.println(evento);
+
+            boolean exitBook = false;
+
+            while (!exitBook) {
+                System.out.println("Do you wish to book tickets for this event? Y/N");
+
+                String answer = scan.nextLine().toUpperCase();
+
+                switch (answer) {
+                    case "N":
+                        exitBook = true;
+                        break;
+                    case "Y":
+                        System.out.println("The reserved tickets are : " + evento.getNumberOfBookedSeats());
+
+                        System.out.println("How many tickets do you want to book?");
+
+                        int seatsToBook = Integer.parseInt(scan.nextLine());
+
+                        if (isCorrect) {
+                            try {
+                                evento.book(seatsToBook);
+
+                                System.out.println("Your booking is complete");
+
+                                exitBook = true;
+
+                                System.out.println("The number of booked seats is: " + evento.getNumberOfBookedSeats());
+                                System.out.println("The remaining availability of tickets is: " + evento.getAvailableSeats());
+
+                            } catch (IllegalArgumentException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }
+
+                        break;
+                    default:
+                        System.out.println("Invalid answer");
+                        break;
+
+                }
+
+            }
+
+
+            boolean exitCancel = false;
+
+            while (!exitCancel) {
+                System.out.println("Do you wish to cancel your booking for this event? Y/N");
+
+                String answer = scan.nextLine().toUpperCase();
+
+                switch (answer) {
+                    case "N":
+                        exitCancel = true;
+                        break;
+                    case "Y":
+                        System.out.println("How many tickets do you want to cancel?");
+
+                        int ticketsToCancel = Integer.parseInt(scan.nextLine());
+
+                        try {
+                            evento.cancel(ticketsToCancel);
+
+                            System.out.println("Your cancellation is done!");
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                        }
+
+                        System.out.println("The number of booked seats is: " + evento.getNumberOfBookedSeats());
+                        System.out.println("The remaining availability of tickets is: " + evento.getAvailableSeats());
+                        
+
+                        break;
+                    default:
+                        System.out.println("Invalid answer");
+                        break;
+
+                }
+
+            }
+
         }
 
-
     }
-
-
 }

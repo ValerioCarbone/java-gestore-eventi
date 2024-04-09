@@ -55,45 +55,49 @@ public class Event {
 
     // METODI
 
-    public void book(Event event, int seatsToBook) {
+    public void book(int seatsToBook) {
         try {
-            if (checkSeats(event.getNumberOfSeats(), event.getNumberOfBookedSeats(), seatsToBook) && checkDate(event.getDate())) {
+            if (checkSeats(this.getNumberOfSeats(), this.getNumberOfBookedSeats(), seatsToBook) && checkDate()) {
                 this.numberOfBookedSeats += seatsToBook;
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Fail to book." + e);
+            System.out.println("Fail to book.");
         }
     }
 
-    public void cancel(Event event, int seatsToCancel) throws IllegalArgumentException {
+    public void cancel(int seatsToCancel) throws IllegalArgumentException {
 
-        if (event.getNumberOfBookedSeats() >= seatsToCancel) {
+        if (this.getNumberOfBookedSeats() >= seatsToCancel) {
             this.numberOfBookedSeats -= seatsToCancel;
-        } else if (event.getNumberOfBookedSeats() < seatsToCancel) {
+        } else if (this.getNumberOfBookedSeats() < seatsToCancel) {
             throw new IllegalArgumentException("You can't cancel seats not booked");
-        } else if (!checkDate(event.getDate())) {
+        } else if (!checkDate()) {
             throw new IllegalArgumentException("You can't cancel booked seats for a past event");
         }
 
     }
 
     public boolean checkSeats(int numberOfSeats, int bookedSeats, int seatsToBook) throws IllegalArgumentException {
-        if (numberOfSeats - bookedSeats > seatsToBook) {
+        if (numberOfSeats - bookedSeats >= seatsToBook) {
             return true;
         } else {
             throw new IllegalArgumentException("Not enough seats to complete your booking!");
         }
     }
 
-    public boolean checkDate(LocalDate eventDate) throws IllegalArgumentException {
+    public boolean checkDate() throws IllegalArgumentException {
 
         LocalDate currentDate = LocalDate.now();
 
-        if (eventDate.isBefore(currentDate)) throw new IllegalArgumentException("You can't book a seat for a past " +
+        if (date.isBefore(currentDate)) throw new IllegalArgumentException("You can't book a seat for a past " +
                 "event");
         else {
             return true;
         }
+    }
+
+    public int getAvailableSeats() {
+        return getNumberOfSeats() - getNumberOfBookedSeats();
     }
 
     @Override
