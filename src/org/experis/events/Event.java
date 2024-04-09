@@ -28,6 +28,10 @@ public class Event {
 
     }
 
+    public Event() {
+
+    }
+
     public String getTitle() {
         return title;
     }
@@ -99,12 +103,13 @@ public class Event {
     public int getAvailableSeats() {
         return getNumberOfSeats() - getNumberOfBookedSeats();
     }
+    
 
     @Override
     public String toString() {
 
 
-        return "Event{" +
+        return "Event { " +
                 "date = " + date +
                 ", title = '" + title + '\'' +
                 '}';

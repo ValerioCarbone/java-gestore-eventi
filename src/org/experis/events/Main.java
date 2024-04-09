@@ -10,6 +10,32 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
+        // BONUS
+
+        Event disco = new Event(2000, LocalDate.parse("2024-07-24"), "Disco");
+        Event mostra = new Event(4000, LocalDate.parse("2024-07-29"), "Mostra");
+        Event gara = new Event(1000, LocalDate.parse("2024-07-24"), "Gara");
+        Event sfilata = new Event(2000, LocalDate.parse("2024-09-20"), "Sfilata");
+
+        ProgrammEventi programma = new ProgrammEventi("Festival Napoli");
+
+        programma.addEvent(disco);
+        programma.addEvent(mostra);
+        programma.addEvent(gara);
+        programma.addEvent(sfilata);
+
+        System.out.println(programma.getDateEvents(LocalDate.parse("2024-07-24")));
+
+        System.out.println(programma.getNumberOfEvents());
+
+        System.out.println(programma.getEvents());
+
+        programma.clearList();
+
+        System.out.println(programma.getNumberOfEvents());
+
+        // FINE BONUS
+
         Event evento = null;
 
         try {
@@ -32,7 +58,7 @@ public class Main {
 
             System.out.println("Date (dd-mm-yyyy) ");
 
-            LocalDate date = null;
+            LocalDate date;
             try {
                 date = LocalDate.parse(scan.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 System.out.println(date);
@@ -43,7 +69,7 @@ public class Main {
 
             }
 
-            System.out.println("How many seats have your location?");
+            System.out.println("How many seats has our location?");
 
             int seats = Integer.parseInt(scan.nextLine());
 
@@ -75,21 +101,20 @@ public class Main {
 
                             int seatsToBook = Integer.parseInt(scan.nextLine());
 
-                            if (isCorrect) {
-                                try {
-                                    evento.book(seatsToBook);
+                            try {
+                                evento.book(seatsToBook);
 
-                                    System.out.println("Your booking is complete");
+                                System.out.println("Your booking is complete");
 
-                                    exitBook = true;
+                                exitBook = true;
 
-                                    System.out.println("The number of booked seats is: " + evento.getNumberOfBookedSeats());
-                                    System.out.println("The remaining availability of tickets is: " + evento.getAvailableSeats());
+                                System.out.println("The number of booked tickets is: " + evento.getNumberOfBookedSeats());
+                                System.out.println("The remaining availability of tickets is: " + evento.getAvailableSeats());
 
-                                } catch (IllegalArgumentException e) {
-                                    System.out.println(e.getMessage());
-                                }
+                            } catch (IllegalArgumentException e) {
+                                System.out.println(e.getMessage());
                             }
+
 
                             break;
                         default:
@@ -127,7 +152,7 @@ public class Main {
                                 System.out.println(e.getMessage());
                             }
 
-                            System.out.println("The number of booked seats is: " + evento.getNumberOfBookedSeats());
+                            System.out.println("The number of booked tickets is: " + evento.getNumberOfBookedSeats());
                             System.out.println("The remaining availability of tickets is: " + evento.getAvailableSeats());
 
 
